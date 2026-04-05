@@ -1,6 +1,8 @@
 package com.finance.financebackend.repository;
 
 import com.finance.financebackend.entity.FinancialRecord;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
@@ -31,4 +33,6 @@ public interface FinancialRecordRepository extends JpaRepository<FinancialRecord
 
     @Query("SELECT f FROM FinancialRecord f WHERE f.isDeleted = false AND (LOWER(f.notes) LIKE LOWER(CONCAT('%', :keyword, '%')) OR LOWER(f.category) LIKE LOWER(CONCAT('%', :keyword, '%')))")
     List<FinancialRecord> searchByKeyword(@Param("keyword") String keyword);
+
+    Page<FinancialRecord> findByIsDeletedFalse(Pageable pageable);
 }

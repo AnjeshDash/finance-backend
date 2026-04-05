@@ -9,6 +9,7 @@ import lombok.*;
 @Builder
 public class AuthResponseDTO {
     private String token;
+    @Builder.Default
     private String type = "Bearer";
     private String email;
     private String name;
