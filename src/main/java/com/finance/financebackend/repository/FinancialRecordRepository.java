@@ -35,4 +35,17 @@ public interface FinancialRecordRepository extends JpaRepository<FinancialRecord
     List<FinancialRecord> searchByKeyword(@Param("keyword") String keyword);
 
     Page<FinancialRecord> findByIsDeletedFalse(Pageable pageable);
+
+    @Query(value = "SELECT * FROM financial_records WHERE is_deleted = false ORDER BY created_at DESC LIMIT 5", nativeQuery = true)
+    List<FinancialRecord> getRecentTransactions();
+
+    @Query(value = "SELECT EXTRACT(YEAR FROM date) as year, " +
+            "EXTRACT(MONTH FROM date) as month, " +
+            "type, SUM(amount) as total " +
+            "FROM financial_records " +
+            "WHERE is_deleted = false " +
+            "GROUP BY EXTRACT(YEAR FROM date), EXTRACT(MONTH FROM date), type " +
+            "ORDER BY year, month",
+            nativeQuery = true)
+    List<Object[]> getMonthlyTrends();
 }
