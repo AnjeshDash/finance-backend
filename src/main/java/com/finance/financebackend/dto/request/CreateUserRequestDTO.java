@@ -1,0 +1,26 @@
+package com.finance.financebackend.dto.request;
+
+import jakarta.validation.constraints.*;
+import lombok.*;
+
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
+public class CreateUserRequestDTO {
+
+    @NotBlank(message = "Name is required")
+    @Size(min = 2, max = 100, message = "Name must be between 2-100 characters")
+    private String name;
+
+    @NotBlank(message = "Email is required")
+    @Email(message = "Invalid email format")
+    private String email;
+
+    @NotBlank(message = "Password is required")
+    @Size(min = 6, message = "Password must be at least 6 characters")
+    private String password;
+
+    @NotBlank(message = "Role is required")
+    private String roleName;
+}
