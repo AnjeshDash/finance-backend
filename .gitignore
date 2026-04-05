@@ -29,5 +29,12 @@ build/
 !**/src/main/**/build/
 !**/src/test/**/build/
 
+# Environment specific (passwords yahan nahi jaane chahiye)
+application-prod.properties
+application-local.properties
+
 ### VS Code ###
 .vscode/
+
+# Mac OS
+.DS_Store
